@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice Casio Nude</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f0eb; /* crème nude */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #fce8d5; /* nude/rose poudré */
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 320px;
+        }
+
+        .display {
+            background-color: #fffaf5; /* beige clair */
+            color: #c97b63; /* brun rosé */
+            padding: 15px;
+            font-size: 28px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn-custom {
+            font-size: 16px;
+            padding: 14px;
+            border-radius: 12px;
+            background-color: #e8cfc1; /* beige rosé */
+            color: #5c4033; /* brun foncé */
+            border: none;
+            box-shadow: 0 4px #d3b8aa;
+            transition: transform 0.1s ease;
+        }
+
+        .btn-custom:active {
+            transform: scale(0.95);
+        }
+
+        .btn-operator {
+            background-color: #f2b8a0; /* nude plus foncé */
+            color: #fff;
+        }
+
+        .btn-equal {
+            background-color: #c97b63; /* brun rosé intense */
+            color: #fff;
+        }
+
+        .btn-clear {
+            background-color: #f2d0c2; /* nude clair */
+            color: #5c4033;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        <div class="buttons">
+            <button class="btn btn-custom btn-clear" onclick="clearDisplay()">C</button>
+            <button class="btn btn-custom btn-operator" onclick="appendOperator('(')">(</button>
+            <button class="btn btn-custom btn-operator" onclick="appendOperator(')')">)</button>
+            <button class="btn btn-custom btn-operator" onclick="appendOperator('/')">÷</button>
+
+            <button class="btn btn-custom" onclick="appendNumber('7')">7</button>
+            <button class="btn btn-custom" onclick="appendNumber('8')">8</button>
+            <button class="btn btn-custom" onclick="appendNumber('9')">9</button>
+            <button class="btn btn-custom btn-operator" onclick="appendOperator('*')">×</button>
+
+            <button class="btn btn-custom" onclick="appendNumber('4')">4</button>
+            <button class="btn btn-custom" onclick="appendNumber('5')">5</button>
+            <button class="btn btn-custom" onclick="appendNumber('6')">6</button>
+            <button class="btn btn-custom btn-operator" onclick="appendOperator('-')">−</button>
+
+            <button class="btn btn-custom" onclick="appendNumber('1')">1</button>
+            <button class="btn btn-custom" onclick="appendNumber('2')">2</button>
+            <button class="btn btn-custom" onclick="appendNumber('3')">3</button>
+            <button class="btn btn-custom btn-operator" onclick="appendOperator('+')">+</button>
+
+            <button class="btn btn-custom" onclick="appendNumber('0')">0</button>
+            <button class="btn btn-custom" onclick="appendOperator('.')">.</button>
+            <button class="btn btn-custom btn-equal" onclick="calculate()">=</button>
+            <button class="btn btn-custom btn-clear" onclick="backspace()">⌫</button>
+
+            <!-- Ligne scientifique -->
+            <button class="btn btn-custom btn-operator" onclick="appendFunction('Math.sqrt(')">√</button>
+            <button class="btn btn-custom btn-operator" onclick="appendFunction('Math.pow(')">xʸ</button>
+            <button class="btn btn-custom btn-operator" onclick="appendFunction('Math.sin(')">sin</button>
+            <button class="btn btn-custom btn-operator" onclick="appendFunction('Math.cos(')">cos</button>
+
+            <button class="btn btn-custom btn-operator" onclick="appendFunction('Math.tan(')">tan</button>
+            <button class="btn btn-custom btn-operator" onclick="appendFunction('Math.log(')">ln</button>
+            <button class="btn btn-custom btn-operator" onclick="appendFunction('Math.exp(')">exp</button>
+            <button class="btn btn-custom btn-operator" onclick="appendOperator('**')">^</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function appendNumber(number) {
+            if (display.innerText === '0' || display.innerText === 'Erreur') {
+                display.innerText = number;
+            } else {
+                display.innerText += number;
+            }
+        }
+
+        function appendOperator(operator) {
+            display.innerText += operator;
+        }
+
+        function appendFunction(func) {
+            display.innerText += func;
+        }
+
+        function clearDisplay() {
+            display.innerText = '0';
+        }
+
+        function backspace() {
+            display.innerText = display.innerText.slice(0, -1) || '0';
+        }
+
+        function calculate() {
+            try {
+                let result = eval(display.innerText);
+                display.innerText = result;
+            } catch (e) {
+                display.innerText = 'Erreur';
+            }
+        }
+    </script>
+
+</body>
+</html>
